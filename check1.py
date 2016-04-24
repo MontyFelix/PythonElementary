@@ -3,7 +3,7 @@
 import enchant
 from sys import argv
 
-stria = argv[1:]
+COMMAND_STRING = argv[1:]
 
 def wrapper(fuc):
     """Decorator separate valid words
@@ -16,7 +16,7 @@ def wrapper(fuc):
         wrong = []
         for i in words:
             #if True then word is in dictionary enchant
-            if che.check(i) == True:
+            if che.check(i):
                 continue
             else:
                 #if False separate word in two lists
@@ -35,9 +35,9 @@ def stri(words):
     words = " ".join(words)
     result = []
     [result.append({x: words.count(x)})
-    for x in words if {x: words.count(x)} not in result]
+    for x in words if {x: words.count(x)} not in result if not x == " "]
     if result:
         print "words:", lenwords, "\nCharacters:", len(words), "\n", result
         return result
 
-stri(stria)
+stri(COMMAND_STRING)
